@@ -3,8 +3,14 @@ import {Listing} from './screens/Listing';
 import {PlantView} from './screens/PlantView';
 
 export type NavigationProp = {
+  route: {
+    params: any;
+  };
   navigation: {
     navigate: (screenName: string, params?: any) => void;
+    push: (screenName: string, params?: any) => void;
+    goBack: () => void;
+    popToTop: () => void;
   };
 };
 

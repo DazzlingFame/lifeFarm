@@ -7,7 +7,7 @@ export const Listing: React.FC<NavigationProp> = ({navigation}) => {
     <View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate(SCREENS.PlantView.name);
+          navigation.navigate(SCREENS.PlantView.name, {text: 'View'});
         }}>
         <Text>Listing</Text>
       </TouchableOpacity>
