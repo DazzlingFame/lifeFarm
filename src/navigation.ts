@@ -1,10 +1,11 @@
 import {ComponentClass, FunctionComponent} from 'react';
 import {Listing} from './screens/Listing';
 import {PlantView} from './screens/PlantView';
+import PlantEdit from './screens/PlantEdit';
 
-export type NavigationProp = {
+export type NavigationProp<T> = {
   route: {
-    params: any;
+    params: T;
   };
   navigation: {
     navigate: (screenName: string, params?: any) => void;
@@ -19,15 +20,25 @@ type Screen = {
   component: ComponentClass<any, any> | FunctionComponent<any>;
 };
 
-type Screens = Record<string, Screen>;
+enum ScreenNames {
+  ListingName = 'Listing',
+  PlantViewName = 'PlantView',
+  PlantEditName = 'PlantEdit',
+}
+
+type Screens = Record<ScreenNames, Screen>;
 
 export const SCREENS: Screens = {
   Listing: {
-    name: 'Listing',
+    name: ScreenNames.ListingName,
     component: Listing,
   },
   PlantView: {
-    name: 'PlantView',
+    name: ScreenNames.PlantViewName,
     component: PlantView,
+  },
+  PlantEdit: {
+    name: ScreenNames.PlantEditName,
+    component: PlantEdit,
   },
 };

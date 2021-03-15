@@ -2,13 +2,14 @@ import {ImageSourcePropType, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {PlantCardStyles} from './PlantCardStyles';
 
-export type PlantCardType = {
+export type Plant = {
   image?: ImageSourcePropType;
   name: string;
+  species: string;
 };
 
 type Props = {
-  item: PlantCardType;
+  item: Plant;
   onPress: () => void;
 };
 

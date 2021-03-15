@@ -1,72 +1,69 @@
 import {FlatList, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {NavigationProp, SCREENS} from '../navigation';
 import {ListingStyles} from './ListingStyles';
-import {PlantCardType, EmptyState, PlantCard} from '../components/Listing';
+import {EmptyState, Plant, PlantCard} from '../components/Listing';
+import AddPlantButton from '../components/Listing/AddPlantButton';
+import {EditStep, EditStepCodes} from './PlantEdit';
+import asyncStorage from '../utils/asyncStorage';
+import {PLANTS_ARRAY_KEY} from '../constants';
 
-const plantCardsMock: PlantCardType[] = [
+const initialAddSteps: EditStep[] = [
   {
-    name: 'Oleg',
+    title: 'Введите имя',
+    code: EditStepCodes.input,
+    plantEditingField: 'name',
   },
   {
-    name: 'Koshka',
-  },
-  {
-    name: 'PalmTree',
-  },
-  {
-    name: 'Koshka1',
-  },
-  {
-    name: 'Koshka2',
-  },
-  {
-    name: 'PalmTree1',
-  },
-  {
-    name: 'Koshka3',
-  },
-  {
-    name: 'Koshka4',
-  },
-  {
-    name: 'PalmTree3',
-  },
-  {
-    name: 'Koshka5',
-  },
-  {
-    name: 'Koshka6',
+    title: 'Введите вид',
+    code: EditStepCodes.input,
+    plantEditingField: 'species',
   },
 ];
 
-export const Listing: React.FC<NavigationProp> = ({navigation}) => {
-  const isShowingEmptyState = false;
+export const Listing: React.FC<NavigationProp<{}>> = ({navigation}) => {
+  const [plantItems, setPlantItems] = useState<Plant[]>([]);
+  asyncStorage
+    .getItem<Plant[] | undefined>(PLANTS_ARRAY_KEY)
+    .then((savedPlants) => {
+      setPlantItems(savedPlants || []);
+    });
 
-  const onPlantCardPressed = (plantItem: PlantCardType) => {
-    navigation.navigate(SCREENS.PlantView.name, {text: plantItem.name});
+  const onPlantCardPressed = (plantItem: Plant) => {
+    navigation.navigate(SCREENS.PlantView.name, {plant: plantItem});
+  };
+
+  const onPlantEditPressed = (steps: EditStep[]) => {
+    navigation.push(SCREENS.PlantEdit.name, {steps, currentStep: steps[0]});
   };
 
   return (
     <View style={ListingStyles.container}>
-      {isShowingEmptyState ? (
+      {!plantItems?.length ? (
         <EmptyState
           onPress={() => {
-            navigation.navigate(SCREENS.PlantView.name, {text: 'View'});
+            onPlantEditPressed(initialAddSteps);
           }}
         />
       ) : (
-        <FlatList
-          numColumns={2}
-          data={plantCardsMock}
-          renderItem={(renderItem) => (
-            <PlantCard
-              item={renderItem.item}
-              onPress={() => onPlantCardPressed(renderItem.item)}
-              key={renderItem.item.name}
-            />
-          )}
-        />
+        <>
+          <FlatList
+            numColumns={2}
+            data={plantItems}
+            renderItem={(renderItem) => (
+              <PlantCard
+                item={renderItem.item}
+                onPress={() => onPlantCardPressed(renderItem.item)}
+                key={renderItem.item.name}
+              />
+            )}
+          />
+          <AddPlantButton
+            onPress={() => {
+              onPlantEditPressed(initialAddSteps);
+            }}
+          />
+        </>
       )}
     </View>
   );

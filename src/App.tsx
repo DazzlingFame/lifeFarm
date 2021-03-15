@@ -18,6 +18,10 @@ const App = () => {
           name={SCREENS.PlantView.name}
           component={SCREENS.PlantView.component}
         />
+        <Stack.Screen
+          name={SCREENS.PlantEdit.name}
+          component={SCREENS.PlantEdit.component}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
