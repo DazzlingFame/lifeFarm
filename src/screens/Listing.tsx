@@ -50,6 +50,7 @@ export const Listing: React.FC<NavigationProp<{}>> = ({navigation}) => {
           <FlatList
             numColumns={2}
             data={plantItems}
+            contentContainerStyle={ListingStyles.contentContainer}
             renderItem={(renderItem) => (
               <PlantCard
                 item={renderItem.item}

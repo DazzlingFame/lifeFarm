@@ -9,6 +9,18 @@ export const PlantCardStyles = StyleSheet.create({
     marginTop: WINDOW_WIDTH * 0.033,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'cyan',
+    backgroundColor: 'rgba(250, 250, 250, 0.8)',
+    borderRadius: 16,
+  },
+  name: {
+    position: 'absolute',
+    bottom: 8,
+    fontSize: 16,
+    textShadowColor: '#FFFFFF',
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 1,
   },
 });
