@@ -1,6 +1,8 @@
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import {EditStep} from '../../screens/PlantEdit';
+import {InputStyles} from './InputStyles';
+import Submit from './Submit';
 
 type Props = {
   initialText?: string;
@@ -8,15 +10,15 @@ type Props = {
   onSubmit: (text: string) => void;
 };
 
-const Input: React.FC<Props> = ({initialText, onSubmit, step}) => {
+const Input: React.FC<Props> = ({initialText, onSubmit}) => {
   const [currentText, setCurrentText] = useState(initialText || '');
   return (
-    <View>
-      <Text>{step.title}</Text>
-      <TextInput onChangeText={(text) => setCurrentText(text)} />
-      <TouchableOpacity onPress={() => onSubmit(currentText)}>
-        <Text>Далее</Text>
-      </TouchableOpacity>
+    <View style={InputStyles.container}>
+      <TextInput
+        style={InputStyles.input}
+        onChangeText={(text) => setCurrentText(text)}
+      />
+      <Submit onPress={() => onSubmit(currentText)} />
     </View>
   );
 };

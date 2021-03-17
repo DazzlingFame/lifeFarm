@@ -5,6 +5,7 @@ import {Plant} from '../components/Listing';
 import Input from '../components/PlantEdit/Input';
 import asyncStorage from '../utils/asyncStorage';
 import {PLANTS_ARRAY_KEY} from '../constants';
+import {PlantEditStyles} from './PlantEditStyles';
 
 export enum EditStepCodes {
   input,
@@ -96,7 +97,12 @@ const PlantEdit: React.FC<Props> = ({route, navigation}) => {
     }
   };
 
-  return <View>{getCurrentStepComponent()}</View>;
+  return (
+    <View style={PlantEditStyles.container}>
+      <Text style={PlantEditStyles.header}>{currentStep.title}</Text>
+      {getCurrentStepComponent()}
+    </View>
+  );
 };
 
 export default PlantEdit;
