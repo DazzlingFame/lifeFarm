@@ -4,7 +4,7 @@ import {NavigationProp} from '../navigation';
 import Avatar from '../components/PlantView';
 import {getRandomImage} from '../utils/random';
 import {PlantViewStyles} from './PlantViewStyles';
-import {getPlantImage, getPlantName, Plant} from '../Plant';
+import {getPlantBirthDay, getPlantImage, getPlantName, Plant} from '../Plant';
 
 const cactusPng = require('../assets/images/cactus-png.png');
 const palmPng = require('../assets/images/palm-tree-png.png');
@@ -34,7 +34,9 @@ export const PlantView: React.FC<NavigationProp<NavigationData>> = ({
               PlantViewStyles.headerText
             }>{`${route.params.plant.species} ${route.params.plant.name}`}</Text>
         </View>
-        <Text>{route.params.plant.birthDay}</Text>
+        <Text>
+          {new Date(getPlantBirthDay(route.params.plant)).toDateString()}
+        </Text>
       </ScrollView>
     </View>
   );

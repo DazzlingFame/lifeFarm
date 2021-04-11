@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {pushToPlantsList} from '../actions';
 import {PlantKeys} from '../Plant';
+import {generateRandomChars} from '../utils/random';
 
 export enum EditStepCodes {
   input,
@@ -79,6 +80,7 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
 
   const getNextStep = () => {
     if (currentStepIndex + 1 === steps.length) {
+      editedItem.current.id = generateRandomChars();
       addNewPlant(editedItem.current);
       navigation.popToTop();
       navigation.navigate(SCREENS.PlantView.name, {

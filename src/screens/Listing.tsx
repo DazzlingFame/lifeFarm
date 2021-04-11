@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import {AppState} from '../reducers';
 import {Dispatch} from 'redux';
 import {setPlantsList} from '../actions';
-import {getPlantName} from '../Plant';
+import {getPlantId} from '../Plant';
 import {initialPlantAddSteps} from '../components/PlantEdit';
 
 // const {CameraModule} = NativeModules;
@@ -72,7 +72,7 @@ const Listing: React.FC<Props> = ({setPlants, navigation, plantsArray}) => {
                 item={renderItem.item}
                 onPress={() => onPlantCardPressed(renderItem.item)}
                 onLongPress={() => onDeletePlant(renderItem.item)}
-                key={getPlantName(renderItem.item)}
+                key={getPlantId(renderItem.item)}
               />
             )}
           />
