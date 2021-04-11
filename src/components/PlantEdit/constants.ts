@@ -13,14 +13,20 @@ export const editSpeciesStep = {
   plantEditingField: PlantKeys.species,
 };
 
-export const editBirtDayStep = {
+export const editBirthDayStep = {
   title: 'Когда он у тебя появился?',
   code: EditStepCodes.datePicker,
+  plantEditingField: PlantKeys.birthDay,
+};
+
+export const editPhotoStep = {
+  title: 'Как он выглядит?',
+  code: EditStepCodes.photo,
   plantEditingField: PlantKeys.birthDay,
 };
 
 export const initialPlantAddSteps: EditStep[] = [
   editNameStep,
   editSpeciesStep,
-  editBirtDayStep,
+  editBirthDayStep,
 ];

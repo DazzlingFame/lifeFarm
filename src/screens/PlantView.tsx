@@ -5,7 +5,7 @@ import Avatar from '../components/PlantView';
 import {getRandomImage} from '../utils/random';
 import {PlantViewStyles} from './PlantViewStyles';
 import {getPlantBirthDay, getPlantImage, getPlantName, Plant} from '../Plant';
-import {editNameStep} from '../components/PlantEdit';
+import {editNameStep, editPhotoStep} from '../components/PlantEdit';
 
 const cactusPng = require('../assets/images/cactus-png.png');
 const palmPng = require('../assets/images/palm-tree-png.png');
@@ -22,6 +22,12 @@ export const PlantView: React.FC<NavigationProp<NavigationData>> = ({
     <View>
       <ScrollView>
         <Avatar
+          onLongPress={() => {
+            navigation.push(SCREENS.PlantEdit.name, {
+              plantItem: route.params.plant,
+              steps: [editPhotoStep],
+            });
+          }}
           source={
             getPlantImage(route.params.plant) ??
             getRandomImage(getPlantName(route.params.plant), [

@@ -1,5 +1,10 @@
 import React, {useRef} from 'react';
-import {Text, View} from 'react-native';
+import {
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  NativeModules,
+} from 'react-native';
 import {NavigationProp, SCREENS} from '../navigation';
 import {Plant} from '../components/Listing';
 import Input from '../components/PlantEdit/Input';
@@ -10,6 +15,8 @@ import {Dispatch} from 'redux';
 import {pushToPlantsList} from '../actions';
 import {PlantKeys} from '../Plant';
 import {generateRandomChars} from '../utils/random';
+
+const {CameraModule} = NativeModules;
 
 export enum EditStepCodes {
   input,
@@ -73,7 +80,14 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
           </DatePicker>
         );
       case EditStepCodes.photo:
-        return <Text>photo</Text>;
+        return (
+          <TouchableWithoutFeedback
+            onPress={() => {
+              CameraModule.createCameraEvent('q', 'q');
+            }}>
+            <Text>photo</Text>
+          </TouchableWithoutFeedback>
+        );
       default:
         return <Text>EMPTY</Text>;
     }
