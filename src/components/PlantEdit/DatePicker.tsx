@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {InputStyles} from './InputStyles';
 import Submit from './Submit';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {DatePickerStyles} from './DatePickerStyles';
 
 type Props = {
   initialDate?: number;
@@ -21,8 +22,10 @@ const DatePicker: React.FC<Props> = ({initialDate = Date.now(), onSubmit}) => {
 
   return (
     <View style={InputStyles.container}>
-      <TouchableWithoutFeedback onPress={() => setShow(true)}>
-        <Text>{date.toDateString()}</Text>
+      <TouchableWithoutFeedback
+        style={DatePickerStyles.container}
+        onPress={() => setShow(true)}>
+        <Text style={DatePickerStyles.input}>{date.toDateString()}</Text>
       </TouchableWithoutFeedback>
       {show && (
         <DateTimePicker value={date} onChange={onChange} mode={'date'} />
