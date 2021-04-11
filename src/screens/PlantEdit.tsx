@@ -32,20 +32,21 @@ type DispatchProps = {
 
 type OwnProps = {
   plantItem: Plant;
-  currentStep: EditStep;
   steps: EditStep[];
+  currentStep?: EditStep;
 };
 
 type Props = NavigationProp<OwnProps> & DispatchProps;
 
 const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
-  const {steps, plantItem, currentStep} = route.params;
+  const {steps, plantItem} = route.params;
   const editedItem = useRef<Plant>(
     plantItem || {
       name: '',
       species: '',
     },
   );
+  const currentStep = route.params.currentStep ?? steps[0];
   let currentStepIndex = steps.findIndex(
     (step) => step.plantEditingField === currentStep.plantEditingField,
   );

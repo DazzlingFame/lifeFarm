@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
-import {NavigationProp} from '../navigation';
+import {View, Text, ScrollView, TouchableWithoutFeedback} from 'react-native';
+import {NavigationProp, SCREENS} from '../navigation';
 import Avatar from '../components/PlantView';
 import {getRandomImage} from '../utils/random';
 import {PlantViewStyles} from './PlantViewStyles';
 import {getPlantBirthDay, getPlantImage, getPlantName, Plant} from '../Plant';
+import {editNameStep} from '../components/PlantEdit';
 
 const cactusPng = require('../assets/images/cactus-png.png');
 const palmPng = require('../assets/images/palm-tree-png.png');
@@ -14,6 +15,7 @@ type NavigationData = {
 };
 
 export const PlantView: React.FC<NavigationProp<NavigationData>> = ({
+  navigation,
   route,
 }) => {
   return (
@@ -28,12 +30,19 @@ export const PlantView: React.FC<NavigationProp<NavigationData>> = ({
             ])
           }
         />
-        <View style={PlantViewStyles.headerTextContainer}>
+        <TouchableWithoutFeedback
+          style={PlantViewStyles.headerTextContainer}
+          onPress={() => {
+            navigation.push(SCREENS.PlantEdit.name, {
+              plantItem: route.params.plant,
+              steps: [editNameStep],
+            });
+          }}>
           <Text
             style={
               PlantViewStyles.headerText
             }>{`${route.params.plant.species} ${route.params.plant.name}`}</Text>
-        </View>
+        </TouchableWithoutFeedback>
         <Text>
           {new Date(getPlantBirthDay(route.params.plant)).toDateString()}
         </Text>

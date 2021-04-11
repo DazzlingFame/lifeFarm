@@ -18,6 +18,11 @@ const plantsArray = (
       asyncStorage.saveItem(PLANTS_ARRAY_KEY, action.plantsList);
       return action.plantsList;
     case PUSH_TO_PLANTS_LIST:
+      const plantIndex = state.findIndex((item) => item.id === action.plant.id);
+      if (plantIndex > -1) {
+        state[plantIndex] = action.plant;
+        return [...state];
+      }
       const appendedState = [...state];
       appendedState.push(action.plant);
       asyncStorage.saveItem(PLANTS_ARRAY_KEY, appendedState);
