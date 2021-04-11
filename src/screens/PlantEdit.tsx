@@ -3,9 +3,12 @@ import {Text, View} from 'react-native';
 import {NavigationProp, SCREENS} from '../navigation';
 import {Plant} from '../components/Listing';
 import Input from '../components/PlantEdit/Input';
-import asyncStorage from '../utils/asyncStorage';
-import {PLANTS_ARRAY_KEY} from '../constants';
 import {PlantEditStyles} from './PlantEditStyles';
+import DatePicker from '../components/PlantEdit/DatePicker';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
+import {pushToPlantsList} from '../actions';
+import {PlantKeys} from '../Plant';
 
 export enum EditStepCodes {
   input,
@@ -16,10 +19,14 @@ export enum EditStepCodes {
 
 export type EditStep = {
   code: EditStepCodes;
-  plantEditingField: string;
+  plantEditingField: PlantKeys;
   title: string;
   optional?: boolean;
   isLastStep?: boolean;
+};
+
+type DispatchProps = {
+  addNewPlant: (plant: Plant) => void;
 };
 
 type OwnProps = {
@@ -28,11 +35,11 @@ type OwnProps = {
   steps: EditStep[];
 };
 
-type Props = NavigationProp<OwnProps>;
+type Props = NavigationProp<OwnProps> & DispatchProps;
 
-const PlantEdit: React.FC<Props> = ({route, navigation}) => {
+const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
   const {steps, plantItem, currentStep} = route.params;
-  const editedItem = useRef(
+  const editedItem = useRef<Plant>(
     plantItem || {
       name: '',
       species: '',
@@ -47,22 +54,22 @@ const PlantEdit: React.FC<Props> = ({route, navigation}) => {
       case EditStepCodes.input:
         return (
           <Input
-            step={currentStep}
             onSubmit={(submittedText) => {
-              switch (currentStep.plantEditingField) {
-                case 'name':
-                  editedItem.current.name = submittedText;
-                  break;
-                case 'species':
-                  editedItem.current.species = submittedText;
-                  break;
-              }
+              editedItem.current[currentStep.plantEditingField] = submittedText;
               getNextStep();
             }}
           />
         );
       case EditStepCodes.datePicker:
-        return <Text>datePicker</Text>;
+        return (
+          <DatePicker
+            onSubmit={(submittedDate) => {
+              editedItem.current[currentStep.plantEditingField] = submittedDate;
+              getNextStep();
+            }}>
+            datePicker
+          </DatePicker>
+        );
       case EditStepCodes.photo:
         return <Text>photo</Text>;
       default:
@@ -71,23 +78,12 @@ const PlantEdit: React.FC<Props> = ({route, navigation}) => {
   };
 
   const getNextStep = () => {
-    console.log('INDEX', currentStepIndex, steps.length);
     if (currentStepIndex + 1 === steps.length) {
-      asyncStorage
-        .getItem<Plant[] | undefined>(PLANTS_ARRAY_KEY)
-        .then((plantsArray) => {
-          let newPlantsArray: Plant[] = [];
-          if (plantsArray?.length) {
-            newPlantsArray = plantsArray;
-          }
-          newPlantsArray.push(editedItem.current);
-          asyncStorage.saveItem(PLANTS_ARRAY_KEY, newPlantsArray).then(() => {
-            navigation.popToTop();
-            navigation.navigate(SCREENS.PlantView.name, {
-              plant: editedItem.current,
-            });
-          });
-        });
+      addNewPlant(editedItem.current);
+      navigation.popToTop();
+      navigation.navigate(SCREENS.PlantView.name, {
+        plant: editedItem.current,
+      });
     } else {
       navigation.push(SCREENS.PlantEdit.name, {
         plantItem: editedItem.current,
@@ -105,4 +101,10 @@ const PlantEdit: React.FC<Props> = ({route, navigation}) => {
   );
 };
 
-export default PlantEdit;
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addNewPlant: (plant: Plant) => {
+    dispatch(pushToPlantsList(plant));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(PlantEdit);

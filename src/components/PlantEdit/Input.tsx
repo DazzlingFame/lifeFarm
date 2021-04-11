@@ -1,12 +1,10 @@
 import {TextInput, View} from 'react-native';
 import React, {useState} from 'react';
-import {EditStep} from '../../screens/PlantEdit';
 import {InputStyles} from './InputStyles';
 import Submit from './Submit';
 
 type Props = {
   initialText?: string;
-  step: EditStep;
   onSubmit: (text: string) => void;
 };
 

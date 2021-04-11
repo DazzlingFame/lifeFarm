@@ -12,6 +12,9 @@ export const PlantCardStyles = StyleSheet.create({
     backgroundColor: 'rgba(250, 250, 250, 0.8)',
     borderRadius: 16,
   },
+  image: {
+    flex: 1,
+  },
   name: {
     position: 'absolute',
     bottom: 8,

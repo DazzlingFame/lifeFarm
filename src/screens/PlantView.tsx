@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {NavigationProp} from '../navigation';
-import {Plant} from '../components/Listing';
 import Avatar from '../components/PlantView';
 import {getRandomImage} from '../utils/random';
+import {PlantViewStyles} from './PlantViewStyles';
+import {getPlantImage, getPlantName, Plant} from '../Plant';
 
 const cactusPng = require('../assets/images/cactus-png.png');
 const palmPng = require('../assets/images/palm-tree-png.png');
@@ -20,16 +21,20 @@ export const PlantView: React.FC<NavigationProp<NavigationData>> = ({
       <ScrollView>
         <Avatar
           source={
-            route.params.plant.image ??
-            getRandomImage(route.params.plant.name, [cactusPng, palmPng])
+            getPlantImage(route.params.plant) ??
+            getRandomImage(getPlantName(route.params.plant), [
+              cactusPng,
+              palmPng,
+            ])
           }
         />
-        <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+        <View style={PlantViewStyles.headerTextContainer}>
           <Text
-            style={{
-              fontSize: 20,
-            }}>{`${route.params.plant.species} ${route.params.plant.name}`}</Text>
+            style={
+              PlantViewStyles.headerText
+            }>{`${route.params.plant.species} ${route.params.plant.name}`}</Text>
         </View>
+        <Text>{route.params.plant.birthDay}</Text>
       </ScrollView>
     </View>
   );
