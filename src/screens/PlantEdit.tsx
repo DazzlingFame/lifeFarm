@@ -83,7 +83,7 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
         return (
           <TouchableWithoutFeedback
             onPress={() => {
-              CameraModule.createCameraEvent('q', 'q');
+              CameraModule.createCameraEvent();
             }}>
             <Text>photo</Text>
           </TouchableWithoutFeedback>
