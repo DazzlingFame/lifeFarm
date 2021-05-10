@@ -4,8 +4,8 @@ import {PlantCardStyles} from './PlantCardStyles';
 import {getRandomImage} from '../../utils/random';
 import {getPlantImage, getPlantName, Plant} from '../../Plant';
 
-const cactusPng = require('../../assets/images/cactus-png.png');
-const palmPng = require('../../assets/images/palm-tree-png.png');
+const cactusPng = require('../../assets/images/cactus.png');
+const palmPng = require('../../assets/images/palm-tree.png');
 
 type Props = {
   item: Plant;

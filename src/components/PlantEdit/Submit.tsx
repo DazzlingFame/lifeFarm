@@ -3,12 +3,13 @@ import React from 'react';
 import {SubmitStyles} from './SubmitStyles';
 
 type Props = {
+  text?: string;
   onPress: () => void;
 };
 
-const Submit: React.FC<Props> = ({onPress}) => (
+const Submit: React.FC<Props> = ({text, onPress}) => (
   <TouchableOpacity style={SubmitStyles.container} onPress={onPress}>
-    <Text>Далее</Text>
+    <Text>{text || 'Далее'}</Text>
   </TouchableOpacity>
 );
 

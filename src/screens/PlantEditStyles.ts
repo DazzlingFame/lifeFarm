@@ -4,6 +4,7 @@ export const PlantEditStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 12,
+    paddingBottom: 12,
     flexDirection: 'column',
   },
   header: {

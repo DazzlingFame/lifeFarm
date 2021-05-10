@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {Text, TouchableWithoutFeedback, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {NavigationProp, SCREENS} from '../navigation';
 import Input from '../components/PlantEdit/Input';
 import {PlantEditStyles} from './PlantEditStyles';
@@ -7,11 +7,10 @@ import DatePicker from '../components/PlantEdit/DatePicker';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {pushToPlantsList} from '../actions';
-import {Plant} from '../Plant';
+import {getPlantImage, Plant} from '../Plant';
 import {generateRandomChars} from '../utils/random';
-import {showImagePicker} from '../utils/image';
-import {URIFile} from '../utils/image/types';
 import {EditStep, EditStepCodes} from '../components/PlantEdit';
+import PhotoPicker from '../components/PlantEdit/PhotoPicker';
 
 type DispatchProps = {
   addNewPlant: (plant: Plant) => void;
@@ -61,15 +60,13 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
         );
       case EditStepCodes.image:
         return (
-          <TouchableWithoutFeedback
-            onPress={() => {
-              showImagePicker((file: URIFile) => {
-                editedItem.current[currentStep.plantEditingField] = file;
-                getNextStep();
-              });
-            }}>
-            <Text>image</Text>
-          </TouchableWithoutFeedback>
+          <PhotoPicker
+            initialImage={getPlantImage(editedItem.current)}
+            onSubmit={(file) => {
+              editedItem.current[currentStep.plantEditingField] = file;
+              getNextStep();
+            }}
+          />
         );
       default:
         return <Text>EMPTY</Text>;

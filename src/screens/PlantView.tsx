@@ -7,8 +7,8 @@ import {PlantViewStyles} from './PlantViewStyles';
 import {getPlantBirthDay, getPlantImage, getPlantName, Plant} from '../Plant';
 import {editNameStep, editPhotoStep} from '../components/PlantEdit';
 
-const cactusPng = require('../assets/images/cactus-png.png');
-const palmPng = require('../assets/images/palm-tree-png.png');
+const cactusPng = require('../assets/images/cactus.png');
+const palmPng = require('../assets/images/palm-tree.png');
 
 type NavigationData = {
   plant: Plant;
