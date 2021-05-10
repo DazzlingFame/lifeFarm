@@ -1,26 +1,20 @@
 import React, {useRef} from 'react';
-import {
-  Text,
-  TouchableWithoutFeedback,
-  View,
-  NativeModules,
-} from 'react-native';
+import {Text, TouchableWithoutFeedback, View} from 'react-native';
 import {NavigationProp, SCREENS} from '../navigation';
-import {Plant} from '../components/Listing';
 import Input from '../components/PlantEdit/Input';
 import {PlantEditStyles} from './PlantEditStyles';
 import DatePicker from '../components/PlantEdit/DatePicker';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {pushToPlantsList} from '../actions';
-import {PlantKeys} from '../Plant';
+import {Plant, PlantKeys} from '../Plant';
 import {generateRandomChars} from '../utils/random';
-
-const {CameraModule} = NativeModules;
+import {showImagePicker} from '../utils/image';
+import {URIFile} from '../utils/image/types';
 
 export enum EditStepCodes {
   input,
-  photo,
+  image,
   datePicker,
   success,
 }
@@ -79,13 +73,16 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
             datePicker
           </DatePicker>
         );
-      case EditStepCodes.photo:
+      case EditStepCodes.image:
         return (
           <TouchableWithoutFeedback
             onPress={() => {
-              CameraModule.createCameraEvent();
+              showImagePicker((file: URIFile) => {
+                editedItem.current[currentStep.plantEditingField] = file;
+                getNextStep();
+              });
             }}>
-            <Text>photo</Text>
+            <Text>image</Text>
           </TouchableWithoutFeedback>
         );
       default:

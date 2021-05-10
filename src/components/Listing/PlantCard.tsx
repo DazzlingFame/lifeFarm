@@ -14,6 +14,7 @@ type Props = {
 };
 
 export const PlantCard: React.FC<Props> = ({item, onPress, onLongPress}) => {
+  console.log('item', item);
   return (
     <TouchableOpacity
       style={PlantCardStyles.container}

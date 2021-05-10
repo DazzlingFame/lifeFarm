@@ -1,5 +1,4 @@
 import {AnyAction, combineReducers, Reducer} from 'redux';
-import {Plant} from './components/Listing';
 import {
   ActionPushToPlantsList,
   ActionSetPlantsList,
@@ -8,6 +7,7 @@ import {
 } from './actions';
 import asyncStorage from './utils/asyncStorage';
 import {PLANTS_ARRAY_KEY} from './constants';
+import {Plant} from './Plant';
 
 const plantsArray = (
   state: Plant[] = [],
@@ -21,6 +21,7 @@ const plantsArray = (
       const plantIndex = state.findIndex((item) => item.id === action.plant.id);
       if (plantIndex > -1) {
         state[plantIndex] = action.plant;
+        asyncStorage.saveItem(PLANTS_ARRAY_KEY, state);
         return [...state];
       }
       const appendedState = [...state];

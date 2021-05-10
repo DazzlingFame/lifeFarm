@@ -21,8 +21,8 @@ export const editBirthDayStep = {
 
 export const editPhotoStep = {
   title: 'Как он выглядит?',
-  code: EditStepCodes.photo,
-  plantEditingField: PlantKeys.birthDay,
+  code: EditStepCodes.image,
+  plantEditingField: PlantKeys.image,
 };
 
 export const initialPlantAddSteps: EditStep[] = [
