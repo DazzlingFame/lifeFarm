@@ -230,7 +230,6 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
   @ReactMethod
   public void launchCamera(final ReadableMap options, final Callback callback)
   {
-    Log.d("qwe", options.toString());
     permissionRequestCallback = callback;
 
     if (!isCameraAvailable())

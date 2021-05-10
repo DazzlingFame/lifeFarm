@@ -2,7 +2,7 @@ import {FlatList, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {NavigationProp, SCREENS} from '../navigation';
 import {ListingStyles} from './ListingStyles';
-import {EmptyState, Plant, PlantCard} from '../components/Listing';
+import {EmptyState, PlantCard} from '../components/Listing';
 import AddPlantButton from '../components/Listing/AddPlantButton';
 import {EditStep} from './PlantEdit';
 import asyncStorage from '../utils/asyncStorage';
@@ -11,10 +11,8 @@ import {connect} from 'react-redux';
 import {AppState} from '../reducers';
 import {Dispatch} from 'redux';
 import {setPlantsList} from '../actions';
-import {getPlantId} from '../Plant';
+import {getPlantId, Plant} from '../Plant';
 import {initialPlantAddSteps} from '../components/PlantEdit';
-
-// const {CameraModule} = NativeModules;
 
 type StateProps = {
   plantsArray: Plant[];
@@ -27,7 +25,6 @@ type DispatchProps = {
 type Props = NavigationProp<{}> & StateProps & DispatchProps;
 
 const Listing: React.FC<Props> = ({setPlants, navigation, plantsArray}) => {
-  console.log('!', plantsArray);
   useEffect(() => {
     asyncStorage
       .getItem<Plant[] | undefined>(PLANTS_ARRAY_KEY)
@@ -78,7 +75,6 @@ const Listing: React.FC<Props> = ({setPlants, navigation, plantsArray}) => {
           />
           <AddPlantButton
             onPress={() => {
-              // CameraModule.createCameraEvent('name', 'location');
               onPlantEditPressed(initialPlantAddSteps);
             }}
           />
