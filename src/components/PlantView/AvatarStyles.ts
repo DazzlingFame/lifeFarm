@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {WINDOW_HEIGHT} from '../../constants';
+import {WINDOW_HEIGHT, WINDOW_WIDTH} from '../../constants';
 
 export const AvatarStyles = StyleSheet.create({
   shadowContainer: {overflow: 'hidden', paddingBottom: 5},
@@ -15,6 +15,7 @@ export const AvatarStyles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    width: WINDOW_WIDTH,
     alignSelf: 'center',
   },
 });

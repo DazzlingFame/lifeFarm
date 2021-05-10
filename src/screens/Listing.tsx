@@ -4,7 +4,6 @@ import {NavigationProp, SCREENS} from '../navigation';
 import {ListingStyles} from './ListingStyles';
 import {EmptyState, PlantCard} from '../components/Listing';
 import AddPlantButton from '../components/Listing/AddPlantButton';
-import {EditStep} from './PlantEdit';
 import asyncStorage from '../utils/asyncStorage';
 import {PLANTS_ARRAY_KEY} from '../constants';
 import {connect} from 'react-redux';
@@ -12,7 +11,7 @@ import {AppState} from '../reducers';
 import {Dispatch} from 'redux';
 import {setPlantsList} from '../actions';
 import {getPlantId, Plant} from '../Plant';
-import {initialPlantAddSteps} from '../components/PlantEdit';
+import {EditStep, initialPlantAddSteps} from '../components/PlantEdit';
 
 type StateProps = {
   plantsArray: Plant[];
@@ -47,7 +46,7 @@ const Listing: React.FC<Props> = ({setPlants, navigation, plantsArray}) => {
   };
 
   const onPlantEditPressed = (steps: EditStep[]) => {
-    navigation.push(SCREENS.PlantEdit.name, {steps, currentStep: steps[0]});
+    navigation.push(SCREENS.PlantEdit.name, {steps});
   };
 
   return (
@@ -85,7 +84,6 @@ const Listing: React.FC<Props> = ({setPlants, navigation, plantsArray}) => {
 };
 
 const mapStateToProps = (state: AppState) => {
-  console.log(state);
   return {
     plantsArray: state.plantsArray,
   };

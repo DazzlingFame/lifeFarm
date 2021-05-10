@@ -14,7 +14,7 @@ type NavigationData = {
   plant: Plant;
 };
 
-export const PlantView: React.FC<NavigationProp<NavigationData>> = ({
+const PlantView: React.FC<NavigationProp<NavigationData>> = ({
   navigation,
   route,
 }) => {
@@ -56,3 +56,5 @@ export const PlantView: React.FC<NavigationProp<NavigationData>> = ({
     </View>
   );
 };
+
+export default PlantView;

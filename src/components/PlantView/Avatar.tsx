@@ -1,11 +1,10 @@
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, ImageSourcePropType, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {AvatarStyles} from './AvatarStyles';
-import {URIFile} from '../../utils/image/types';
 
 type Props = {
   onLongPress: () => void;
-  source: URIFile;
+  source: ImageSourcePropType;
 };
 
 const Avatar: React.FC<Props> = ({source, onLongPress}) => {
@@ -19,7 +18,7 @@ const Avatar: React.FC<Props> = ({source, onLongPress}) => {
         <Image
           source={source}
           style={AvatarStyles.image}
-          resizeMode={'center'}
+          resizeMode={'cover'}
         />
       </TouchableOpacity>
     </View>

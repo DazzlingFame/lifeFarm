@@ -7,25 +7,11 @@ import DatePicker from '../components/PlantEdit/DatePicker';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {pushToPlantsList} from '../actions';
-import {Plant, PlantKeys} from '../Plant';
+import {Plant} from '../Plant';
 import {generateRandomChars} from '../utils/random';
 import {showImagePicker} from '../utils/image';
 import {URIFile} from '../utils/image/types';
-
-export enum EditStepCodes {
-  input,
-  image,
-  datePicker,
-  success,
-}
-
-export type EditStep = {
-  code: EditStepCodes;
-  plantEditingField: PlantKeys;
-  title: string;
-  optional?: boolean;
-  isLastStep?: boolean;
-};
+import {EditStep, EditStepCodes} from '../components/PlantEdit';
 
 type DispatchProps = {
   addNewPlant: (plant: Plant) => void;

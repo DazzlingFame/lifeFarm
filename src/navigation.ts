@@ -1,6 +1,6 @@
 import {ComponentClass, FunctionComponent} from 'react';
 import Listing from './screens/Listing';
-import {PlantView} from './screens/PlantView';
+import PlantView from './screens/PlantView';
 import PlantEdit from './screens/PlantEdit';
 
 export type NavigationProp<T> = {

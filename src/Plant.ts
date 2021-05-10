@@ -1,4 +1,3 @@
-import {ImageSourcePropType} from 'react-native';
 import {URIFile} from './utils/image/types';
 
 export type Plant = Record<PlantKeys, PlantValues>;
@@ -23,6 +22,6 @@ type PlantBirthDayGetter = (plant: Plant) => number;
 export const getPlantBirthDay: PlantBirthDayGetter = (plant) =>
   plant.birthDay as number;
 
-type PlantImageGetter = (plant: Plant) => ImageSourcePropType;
+type PlantImageGetter = (plant: Plant) => URIFile | undefined;
 export const getPlantImage: PlantImageGetter = (plant) =>
-  plant.image as ImageSourcePropType;
+  plant.image as URIFile;

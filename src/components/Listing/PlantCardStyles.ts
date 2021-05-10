@@ -13,6 +13,8 @@ export const PlantCardStyles = StyleSheet.create({
     borderRadius: 16,
   },
   image: {
+    width: '100%',
+    borderRadius: 16,
     flex: 1,
   },
   name: {

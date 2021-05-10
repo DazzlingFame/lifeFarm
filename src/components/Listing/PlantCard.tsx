@@ -22,7 +22,7 @@ export const PlantCard: React.FC<Props> = ({item, onPress, onLongPress}) => {
       onLongPress={onLongPress}>
       <Image
         style={PlantCardStyles.image}
-        resizeMode={'contain'}
+        resizeMode={'cover'}
         source={
           getPlantImage(item) ??
           getRandomImage(getPlantName(item), [cactusPng, palmPng])

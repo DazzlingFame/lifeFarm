@@ -1,5 +1,5 @@
-import {EditStep, EditStepCodes} from '../../screens/PlantEdit';
 import {PlantKeys} from '../../Plant';
+import {EditStep, EditStepCodes} from './types';
 
 export const editNameStep = {
   title: 'Как его зовут?',
@@ -28,5 +28,6 @@ export const editPhotoStep = {
 export const initialPlantAddSteps: EditStep[] = [
   editNameStep,
   editSpeciesStep,
+  editPhotoStep,
   editBirthDayStep,
 ];
