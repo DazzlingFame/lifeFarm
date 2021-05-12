@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import {AppState} from '../reducers';
 import {Dispatch} from 'redux';
 import {setPlantsList} from '../actions';
-import {getPlantId, Plant} from '../Plant';
+import {Plant} from '../Plant';
 import {EditStep, initialPlantAddSteps} from '../components/PlantEdit';
 
 type StateProps = {
@@ -68,7 +68,7 @@ const Listing: React.FC<Props> = ({setPlants, navigation, plantsArray}) => {
                 item={renderItem.item}
                 onPress={() => onPlantCardPressed(renderItem.item)}
                 onLongPress={() => onDeletePlant(renderItem.item)}
-                key={getPlantId(renderItem.item)}
+                key={renderItem.item.id}
               />
             )}
           />

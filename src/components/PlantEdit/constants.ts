@@ -1,28 +1,27 @@
-import {PlantKeys} from '../../Plant';
 import {EditStep, EditStepCodes} from './types';
 
-export const editNameStep = {
+export const editNameStep: EditStep = {
   title: 'Как его зовут?',
   code: EditStepCodes.input,
-  plantEditingField: PlantKeys.name,
+  plantEditingField: 'name',
 };
 
-export const editSpeciesStep = {
+export const editSpeciesStep: EditStep = {
   title: 'Кто он?',
   code: EditStepCodes.input,
-  plantEditingField: PlantKeys.species,
+  plantEditingField: 'species',
 };
 
-export const editBirthDayStep = {
+export const editBirthDayStep: EditStep = {
   title: 'Когда он у тебя появился?',
   code: EditStepCodes.datePicker,
-  plantEditingField: PlantKeys.birthDay,
+  plantEditingField: 'birthDay',
 };
 
-export const editPhotoStep = {
+export const editPhotoStep: EditStep = {
   title: 'Как он выглядит?',
   code: EditStepCodes.image,
-  plantEditingField: PlantKeys.image,
+  plantEditingField: 'image',
 };
 
 export const initialPlantAddSteps: EditStep[] = [

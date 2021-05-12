@@ -1,4 +1,4 @@
-import {PlantKeys} from '../../Plant';
+import {Plant} from '../../Plant';
 
 export enum EditStepCodes {
   input,
@@ -9,7 +9,7 @@ export enum EditStepCodes {
 
 export type EditStep = {
   code: EditStepCodes;
-  plantEditingField: PlantKeys;
+  plantEditingField: keyof Plant;
   title: string;
   optional?: boolean;
   isLastStep?: boolean;

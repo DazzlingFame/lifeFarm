@@ -4,7 +4,7 @@ import {NavigationProp, SCREENS} from '../navigation';
 import Avatar from '../components/PlantView';
 import {getRandomImage} from '../utils/random';
 import {PlantViewStyles} from './PlantViewStyles';
-import {getPlantBirthDay, getPlantImage, getPlantName, Plant} from '../Plant';
+import {Plant} from '../Plant';
 import {editNameStep, editPhotoStep} from '../components/PlantEdit';
 
 const cactusPng = require('../assets/images/cactus.png');
@@ -29,11 +29,8 @@ const PlantView: React.FC<NavigationProp<NavigationData>> = ({
             });
           }}
           source={
-            getPlantImage(route.params.plant) ??
-            getRandomImage(getPlantName(route.params.plant), [
-              cactusPng,
-              palmPng,
-            ])
+            route.params.plant.image ??
+            getRandomImage(route.params.plant.name, [cactusPng, palmPng])
           }
         />
         <TouchableWithoutFeedback
@@ -49,9 +46,7 @@ const PlantView: React.FC<NavigationProp<NavigationData>> = ({
               PlantViewStyles.headerText
             }>{`${route.params.plant.species} ${route.params.plant.name}`}</Text>
         </TouchableWithoutFeedback>
-        <Text>
-          {new Date(getPlantBirthDay(route.params.plant)).toDateString()}
-        </Text>
+        <Text>{new Date(route.params.plant.birthDay).toDateString()}</Text>
       </ScrollView>
     </View>
   );

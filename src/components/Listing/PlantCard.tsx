@@ -2,7 +2,7 @@ import {Image, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {PlantCardStyles} from './PlantCardStyles';
 import {getRandomImage} from '../../utils/random';
-import {getPlantImage, getPlantName, Plant} from '../../Plant';
+import {Plant} from '../../Plant';
 
 const cactusPng = require('../../assets/images/cactus.png');
 const palmPng = require('../../assets/images/palm-tree.png');
@@ -23,10 +23,7 @@ export const PlantCard: React.FC<Props> = ({item, onPress, onLongPress}) => {
       <Image
         style={PlantCardStyles.image}
         resizeMode={'cover'}
-        source={
-          getPlantImage(item) ??
-          getRandomImage(getPlantName(item), [cactusPng, palmPng])
-        }
+        source={item.image ?? getRandomImage(item.name, [cactusPng, palmPng])}
       />
       <Text style={PlantCardStyles.name}>{item.name}</Text>
     </TouchableOpacity>

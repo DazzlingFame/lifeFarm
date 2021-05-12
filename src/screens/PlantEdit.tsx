@@ -7,7 +7,7 @@ import DatePicker from '../components/PlantEdit/DatePicker';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {pushToPlantsList} from '../actions';
-import {getPlantImage, Plant} from '../Plant';
+import {Plant} from '../Plant';
 import {generateRandomChars} from '../utils/random';
 import {EditStep, EditStepCodes} from '../components/PlantEdit';
 import PhotoPicker from '../components/PlantEdit/PhotoPicker';
@@ -26,12 +26,7 @@ type Props = NavigationProp<OwnProps> & DispatchProps;
 
 const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
   const {steps, plantItem} = route.params;
-  const editedItem = useRef<Plant>(
-    plantItem || {
-      name: '',
-      species: '',
-    },
-  );
+  const editedItem = useRef<Plant>(plantItem);
   const currentStep = route.params.currentStep ?? steps[0];
   let currentStepIndex = steps.findIndex(
     (step) => step.plantEditingField === currentStep.plantEditingField,
@@ -43,6 +38,7 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
         return (
           <Input
             onSubmit={(submittedText) => {
+              // @ts-ignore
               editedItem.current[currentStep.plantEditingField] = submittedText;
               getNextStep();
             }}
@@ -52,6 +48,7 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
         return (
           <DatePicker
             onSubmit={(submittedDate) => {
+              // @ts-ignore
               editedItem.current[currentStep.plantEditingField] = submittedDate;
               getNextStep();
             }}>
@@ -61,8 +58,9 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
       case EditStepCodes.image:
         return (
           <PhotoPicker
-            initialImage={getPlantImage(editedItem.current)}
+            initialImage={editedItem.current.image}
             onSubmit={(file) => {
+              // @ts-ignore
               editedItem.current[currentStep.plantEditingField] = file;
               getNextStep();
             }}
