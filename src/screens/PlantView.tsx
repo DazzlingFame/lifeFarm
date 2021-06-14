@@ -6,6 +6,7 @@ import {getRandomImage} from '../utils/random';
 import {PlantViewStyles} from './PlantViewStyles';
 import {Plant} from '../Plant';
 import {editNameStep, editPhotoStep} from '../components/PlantEdit';
+import {parseDateTime} from '../utils/date';
 
 const cactusPng = require('../assets/images/cactus.png');
 const palmPng = require('../assets/images/palm-tree.png');
@@ -18,35 +19,37 @@ const PlantView: React.FC<NavigationProp<NavigationData>> = ({
   navigation,
   route,
 }) => {
+  const {plant} = route.params;
+  const parsedBirthDayString = parseDateTime(plant.birthDay);
+
   return (
     <View>
       <ScrollView>
         <Avatar
           onLongPress={() => {
             navigation.push(SCREENS.PlantEdit.name, {
-              plantItem: route.params.plant,
+              plantItem: plant,
               steps: [editPhotoStep],
             });
           }}
           source={
-            route.params.plant.image ??
-            getRandomImage(route.params.plant.name, [cactusPng, palmPng])
+            plant.image ?? getRandomImage(plant.name, [cactusPng, palmPng])
           }
         />
         <TouchableWithoutFeedback
           style={PlantViewStyles.headerTextContainer}
           onPress={() => {
             navigation.push(SCREENS.PlantEdit.name, {
-              plantItem: route.params.plant,
+              plantItem: plant,
               steps: [editNameStep],
             });
           }}>
           <Text
             style={
               PlantViewStyles.headerText
-            }>{`${route.params.plant.species} ${route.params.plant.name}`}</Text>
+            }>{`${plant.species} ${plant.name}`}</Text>
         </TouchableWithoutFeedback>
-        <Text>{new Date(route.params.plant.birthDay).toDateString()}</Text>
+        <Text>{parsedBirthDayString}</Text>
       </ScrollView>
     </View>
   );

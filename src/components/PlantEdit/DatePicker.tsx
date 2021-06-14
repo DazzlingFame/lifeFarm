@@ -4,6 +4,7 @@ import {InputStyles} from './InputStyles';
 import Submit from './Submit';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {DatePickerStyles} from './DatePickerStyles';
+import {parseDate} from '../../utils/date';
 
 type Props = {
   initialDate?: number;
@@ -25,7 +26,7 @@ const DatePicker: React.FC<Props> = ({initialDate = Date.now(), onSubmit}) => {
       <TouchableWithoutFeedback
         style={DatePickerStyles.container}
         onPress={() => setShow(true)}>
-        <Text style={DatePickerStyles.input}>{date.toDateString()}</Text>
+        <Text style={DatePickerStyles.input}>{parseDate(date)}</Text>
       </TouchableWithoutFeedback>
       {show && (
         <DateTimePicker value={date} onChange={onChange} mode={'date'} />
