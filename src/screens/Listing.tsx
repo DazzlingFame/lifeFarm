@@ -35,6 +35,11 @@ const Listing: React.FC<Props> = ({setPlants, navigation, plantsArray}) => {
 
   const onPlantCardPressed = (plantItem: Plant) => {
     navigation.navigate(SCREENS.PlantView.name, {plant: plantItem});
+    // NotificationsManager.scheduleNotification(
+    //   5,
+    //   'LifePlant',
+    //   'Please water me',
+    // );
   };
 
   const onDeletePlant = (plantItem: Plant) => {
