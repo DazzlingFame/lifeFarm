@@ -1,12 +1,18 @@
 import React from 'react';
 import {View, Text, ScrollView, TouchableWithoutFeedback} from 'react-native';
-import {NavigationProp, SCREENS} from '../navigation';
+import {NavigationProp} from '../navigation';
 import Avatar from '../components/PlantView';
 import {getRandomImage} from '../utils/random';
 import {PlantViewStyles} from './PlantViewStyles';
 import {Plant} from '../Plant';
-import {editNameStep, editPhotoStep} from '../components/PlantEdit';
+import {
+  editBirthDayStep,
+  editNameStep,
+  editPhotoStep,
+} from '../components/PlantEdit';
 import {parseDateTime} from '../utils/date';
+import {PlantData} from '../components/PlantView/PlantData';
+import {InitEditScreenRouter} from '../components/PlantEdit/utils';
 
 const cactusPng = require('../assets/images/cactus.png');
 const palmPng = require('../assets/images/palm-tree.png');
@@ -20,36 +26,31 @@ const PlantView: React.FC<NavigationProp<NavigationData>> = ({
   route,
 }) => {
   const {plant} = route.params;
+  const routeToEditScreen = InitEditScreenRouter(navigation, plant);
   const parsedBirthDayString = parseDateTime(plant.birthDay);
 
   return (
     <View>
       <ScrollView>
         <Avatar
-          onLongPress={() => {
-            navigation.push(SCREENS.PlantEdit.name, {
-              plantItem: plant,
-              steps: [editPhotoStep],
-            });
-          }}
+          onLongPress={() => routeToEditScreen([editPhotoStep])}
           source={
             plant.image ?? getRandomImage(plant.name, [cactusPng, palmPng])
           }
         />
         <TouchableWithoutFeedback
           style={PlantViewStyles.headerTextContainer}
-          onPress={() => {
-            navigation.push(SCREENS.PlantEdit.name, {
-              plantItem: plant,
-              steps: [editNameStep],
-            });
-          }}>
+          onLongPress={() => routeToEditScreen([editNameStep])}>
           <Text
             style={
               PlantViewStyles.headerText
             }>{`${plant.species} ${plant.name}`}</Text>
         </TouchableWithoutFeedback>
-        <Text>{parsedBirthDayString}</Text>
+        <PlantData
+          description={'Появился у тебя'}
+          data={parsedBirthDayString}
+          onLongPress={() => routeToEditScreen([editBirthDayStep])}
+        />
       </ScrollView>
     </View>
   );

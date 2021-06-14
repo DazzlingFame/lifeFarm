@@ -3,16 +3,18 @@ import Listing from './screens/Listing';
 import PlantView from './screens/PlantView';
 import PlantEdit from './screens/PlantEdit';
 
+export type Navigation = {
+  navigate: (screenName: string, params?: any) => void;
+  push: (screenName: string, params?: any) => void;
+  goBack: () => void;
+  popToTop: () => void;
+};
+
 export type NavigationProp<T> = {
   route: {
     params: T;
   };
-  navigation: {
-    navigate: (screenName: string, params?: any) => void;
-    push: (screenName: string, params?: any) => void;
-    goBack: () => void;
-    popToTop: () => void;
-  };
+  navigation: Navigation;
 };
 
 type Screen = {
