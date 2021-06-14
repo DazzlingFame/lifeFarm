@@ -8,9 +8,7 @@ type Props = {
   onLongPress: () => void;
 };
 export const PlantData: React.FC<Props> = (props) => (
-  <TouchableWithoutFeedback
-    onLongPress={props.onLongPress}
-    style={PlantDataStyles.touchableContainer}>
+  <TouchableWithoutFeedback onLongPress={props.onLongPress}>
     <View style={PlantDataStyles.container}>
       <Text style={PlantDataStyles.description}>{props.description}</Text>
       <Text style={PlantDataStyles.data}>{props.data}</Text>

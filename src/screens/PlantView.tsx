@@ -13,6 +13,7 @@ import {
 import {parseDateTime} from '../utils/date';
 import {PlantData} from '../components/PlantView/PlantData';
 import {InitEditScreenRouter} from '../components/PlantEdit/utils';
+import {AddNotificationView} from '../components/PlantView/AddNotificationView';
 
 const cactusPng = require('../assets/images/cactus.png');
 const palmPng = require('../assets/images/palm-tree.png');
@@ -51,6 +52,7 @@ const PlantView: React.FC<NavigationProp<NavigationData>> = ({
           data={parsedBirthDayString}
           onLongPress={() => routeToEditScreen([editBirthDayStep])}
         />
+        <AddNotificationView />
       </ScrollView>
     </View>
   );

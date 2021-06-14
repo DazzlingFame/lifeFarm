@@ -1,13 +1,11 @@
 import {StyleSheet} from 'react-native';
 
 export const PlantDataStyles = StyleSheet.create({
-  touchableContainer: {
-    marginBottom: 16,
-  },
   container: {
     display: 'flex',
     flexDirection: 'column',
-    padding: 8,
+    paddingHorizontal: 8,
+    marginBottom: 16,
   },
   description: {
     fontSize: 14,
