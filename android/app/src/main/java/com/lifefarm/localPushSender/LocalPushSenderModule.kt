@@ -1,5 +1,7 @@
 package com.lifefarm.localPushSender
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
@@ -15,6 +17,7 @@ class LocalPushSenderModule internal constructor(var reactContext: ReactApplicat
         return "LocalPushSenderModule"
     }
 
+    @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     @ReactMethod
     fun scheduleNotification(timeToWait: Int, header: String?, text: String?) {
         val data = Data.Builder().putString("HEADER", header).putString("TEXT", text).build();
@@ -22,8 +25,8 @@ class LocalPushSenderModule internal constructor(var reactContext: ReactApplicat
         WorkManager.getInstance(reactContext).enqueueUniquePeriodicWork(
             "SEND_PUSH",
             ExistingPeriodicWorkPolicy.REPLACE,
-            PeriodicWorkRequest.Builder(OneTimeNotification::class.java, 5, TimeUnit.SECONDS)
-                .setInitialDelay(timeToWait.toLong(), TimeUnit.SECONDS)
+            PeriodicWorkRequest.Builder(OneTimeNotification::class.java, timeToWait.toLong(), TimeUnit.DAYS)
+                .setInitialDelay(timeToWait.toLong(), TimeUnit.DAYS)
                 .addTag("Tag")
                 .setInputData(data)
                 .build()

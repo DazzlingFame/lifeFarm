@@ -5,6 +5,7 @@ export enum EditStepCodes {
   image,
   datePicker,
   success,
+  water,
 }
 
 export type EditStep = {

@@ -18,9 +18,9 @@ import {
 import {parseDateTime} from '../utils/date';
 import {PlantData} from '../components/PlantView/PlantData';
 import {InitEditScreenRouter} from '../components/PlantEdit/utils';
-import {AddNotificationView} from '../components/PlantView/AddNotificationView';
-import {editInfoStep} from '../components/PlantEdit/constants';
+import {editInfoStep, editWateringStep} from '../components/PlantEdit/constants';
 import ActionText from "../components/PlantView/ActionText";
+import {plural} from "../utils/text";
 
 const cactusPng = require('../assets/images/cactus.png');
 const palmPng = require('../assets/images/palm-tree.png');
@@ -70,7 +70,17 @@ const PlantView: React.FC<NavigationProp<NavigationData>> = ({
             text={'Добавить особенность'}
             onPress={() => routeToEditScreen([editInfoStep])} />
         )}
-        <AddNotificationView />
+        {plant.waterInterval ? (
+            <PlantData
+                description={'Поливать каждые'}
+                data={`${plant.waterInterval} ${plural(plant.waterInterval, 'день', 'дня', 'дней')}`}
+                onLongPress={() => routeToEditScreen([editWateringStep])}/>
+            ) : (
+            <ActionText
+                text={'Добавить напоминание о поливе'}
+                onPress={() => routeToEditScreen([editWateringStep])} />
+            )
+        }
       </ScrollView>
     </View>
   );

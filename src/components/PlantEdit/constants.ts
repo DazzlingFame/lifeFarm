@@ -30,6 +30,12 @@ export const editInfoStep: EditStep = {
   plantEditingField: 'info',
 };
 
+export const editWateringStep: EditStep = {
+  title: 'Раз в сколько дней его поливать',
+  code: EditStepCodes.water,
+  plantEditingField: 'waterInterval',
+};
+
 export const initialPlantAddSteps: EditStep[] = [
   editNameStep,
   editSpeciesStep,

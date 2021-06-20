@@ -11,6 +11,7 @@ import {Plant} from '../Plant';
 import {generateRandomChars} from '../utils/random';
 import {EditStep, EditStepCodes} from '../components/PlantEdit';
 import PhotoPicker from '../components/PlantEdit/PhotoPicker';
+import NotificationsManager from "../utils/notifications/NotificationsManager";
 
 type DispatchProps = {
   addNewPlant: (plant: Plant) => void;
@@ -66,6 +67,22 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
             }}
           />
         );
+      case EditStepCodes.water:
+        return (
+            <Input
+                keyboardType="numeric"
+                onSubmit={(wateringInterval) => {
+                  // @ts-ignore
+                  editedItem.current[currentStep.plantEditingField] = wateringInterval;
+                  NotificationsManager.scheduleNotification(
+                      Number.parseInt(wateringInterval),
+                      'LifePlant',
+                      'Please water me',
+                  )
+                  getNextStep();
+                }}
+            />
+        )
       default:
         return <Text>EMPTY</Text>;
     }

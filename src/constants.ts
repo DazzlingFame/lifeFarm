@@ -7,4 +7,5 @@ export const PLANTS_ARRAY_KEY = 'PLANTS_ARRAY';
 
 export const COLORS = {
   inputBackground: '#DDDDDD',
+  modalBackground: 'rgba(0, 0, 0, 0.7)',
 };

@@ -7,4 +7,5 @@ export type Plant = {
   species: string;
   birthDay: number;
   info?: string;
+  waterInterval?: number;
 };
