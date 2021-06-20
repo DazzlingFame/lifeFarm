@@ -6,4 +6,5 @@ export type Plant = {
   image: URIFile;
   species: string;
   birthDay: number;
+  info?: string;
 };

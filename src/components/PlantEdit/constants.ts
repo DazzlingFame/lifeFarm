@@ -24,6 +24,12 @@ export const editPhotoStep: EditStep = {
   plantEditingField: 'image',
 };
 
+export const editInfoStep: EditStep = {
+  title: 'Что ещё хочешь о нём рассказать?',
+  code: EditStepCodes.input,
+  plantEditingField: 'info',
+};
+
 export const initialPlantAddSteps: EditStep[] = [
   editNameStep,
   editSpeciesStep,

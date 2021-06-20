@@ -1,5 +1,10 @@
 import React from 'react';
-import {View, Text, ScrollView, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {NavigationProp} from '../navigation';
 import Avatar from '../components/PlantView';
 import {getRandomImage} from '../utils/random';
@@ -14,6 +19,8 @@ import {parseDateTime} from '../utils/date';
 import {PlantData} from '../components/PlantView/PlantData';
 import {InitEditScreenRouter} from '../components/PlantEdit/utils';
 import {AddNotificationView} from '../components/PlantView/AddNotificationView';
+import {editInfoStep} from '../components/PlantEdit/constants';
+import ActionText from "../components/PlantView/ActionText";
 
 const cactusPng = require('../assets/images/cactus.png');
 const palmPng = require('../assets/images/palm-tree.png');
@@ -52,6 +59,17 @@ const PlantView: React.FC<NavigationProp<NavigationData>> = ({
           data={parsedBirthDayString}
           onLongPress={() => routeToEditScreen([editBirthDayStep])}
         />
+        {plant.info ? (
+          <PlantData
+            description={'Особенность'}
+            data={plant.info}
+            onLongPress={() => routeToEditScreen([editInfoStep])}
+          />
+        ) : (
+          <ActionText
+            text={'Добавить особенность'}
+            onPress={() => routeToEditScreen([editInfoStep])} />
+        )}
         <AddNotificationView />
       </ScrollView>
     </View>
