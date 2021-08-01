@@ -23,11 +23,11 @@ class LocalPushSenderModule internal constructor(var reactContext: ReactApplicat
         val data = Data.Builder().putString("HEADER", header).putString("TEXT", text).build();
         
         WorkManager.getInstance(reactContext).enqueueUniquePeriodicWork(
-            "SEND_PUSH",
+            header ?: "SEND_PUSH",
             ExistingPeriodicWorkPolicy.REPLACE,
             PeriodicWorkRequest.Builder(OneTimeNotification::class.java, timeToWait.toLong(), TimeUnit.DAYS)
                 .setInitialDelay(timeToWait.toLong(), TimeUnit.DAYS)
-                .addTag("Tag")
+                .addTag(header ?: "Tag")
                 .setInputData(data)
                 .build()
         )

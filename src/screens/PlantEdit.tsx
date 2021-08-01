@@ -76,8 +76,8 @@ const PlantEdit: React.FC<Props> = ({addNewPlant, route, navigation}) => {
                   editedItem.current[currentStep.plantEditingField] = wateringInterval;
                   NotificationsManager.scheduleNotification(
                       Number.parseInt(wateringInterval),
-                      'LifePlant',
-                      'Please water me',
+                      editedItem.current.name,
+                      'Полей меня, пожалуйста',
                   )
                   getNextStep();
                 }}

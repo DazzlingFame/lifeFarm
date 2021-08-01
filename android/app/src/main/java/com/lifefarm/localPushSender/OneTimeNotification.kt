@@ -13,10 +13,12 @@ class OneTimeNotification(
         workerParams: WorkerParameters
 ): Worker(context, workerParams) {
     override fun doWork(): Result {
+        val header = inputData.getString("HEADER")
+        val text = inputData.getString("TEXT")
         var builder = NotificationCompat.Builder(context, "${context.packageName}-${context.getString(R.string.app_name)}")
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(inputData.getString("HEADER"))
-            .setContentText(inputData.getString("TEXT"))
+            .setContentTitle(header)
+            .setContentText(text)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setChannelId("${context.packageName}-${context.getString(R.string.app_name)}")
 
