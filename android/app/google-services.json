@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "575570794226",
+    "project_id": "lifefarm-a2287",
+    "storage_bucket": "lifefarm-a2287.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575570794226:android:55f74784f2b1c1da87626b",
+        "android_client_info": {
+          "package_name": "com.lifefarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575570794226-ahjhrimeq8rpcvfkl0kmem54k6vrruh5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQCuCc9ol-ramWEjAg1YXGDzgS7un61ac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575570794226-ahjhrimeq8rpcvfkl0kmem54k6vrruh5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
